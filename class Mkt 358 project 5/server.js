@@ -264,12 +264,20 @@ The expression ${expression} is an arithmetic calculation that combines numbers 
 - The order of operations matters: brackets, multiplication or division, then addition or subtraction.
 
 **3. Business example**
-A shop with 2 shelves holding 2 products each has 2 × 2 = ${result} products on those shelves. A useful metric for a real stock decision would be inventory turnover.
+Photosynthesis: correct answer
+12 x 8: 96
+Server: running on http://127.0.0.1:5000Photosynthesis: correct answer
+12 x 8: 96
+Server: running on http://127.0.0.1:5000OPENAI_API_KEY=
+GEMINI_API_KEY=OPENAI_API_KEY=your_openai_api_key
+GEMINI_API_KEY=your_google_gemini_api_keygit add public/script.js
+git commit -m "Fix AI tutor on GitHub Pages"
+git push origin mainA shop selling ${expression} units has ${result} units in total. A useful metric for a real stock decision would be inventory turnover.
 
 **4. Practice example**
 Definition: Arithmetic calculates a numerical result.
 Three key points: Follow operation order, calculate each step, check the result.
-Practical example: 2 + 2 = ${result}.
+Practical example: ${expression} = ${result}.
 Limitation: A calculation is only reliable when the numbers and units are correct.
 
 In another industry, the same arithmetic may represent revenue, inventory, distance, dosage, or another domain-specific quantity.`;
@@ -540,8 +548,115 @@ function formatTutorResponse(content, message) {
   return `Free Local Study Tutor: ${topic}\n\n${answer}`;
 }
 
+const LOCAL_TUTOR_KNOWLEDGE = [
+  {
+    terms: ['photosynthesis', 'plant food process'],
+    title: 'Photosynthesis',
+    definition: 'Photosynthesis is the process in which green plants use sunlight, water, and carbon dioxide to make glucose and release oxygen.',
+    keyIdeas: ['Chlorophyll captures light energy in plant cells.', 'Water and carbon dioxide are raw materials; glucose stores chemical energy.', 'The process supports plant growth and supplies oxygen to many living organisms.'],
+    example: 'A crop uses sunlight and carbon dioxide during the day to produce food, so a farmer can improve growth by providing suitable light, water, and nutrients.',
+    limitation: 'Photosynthesis slows when light, water, temperature, or carbon dioxide is unsuitable.'
+  },
+  {
+    terms: ['economics'],
+    title: 'Economics',
+    definition: 'Economics studies how people, businesses, and governments use limited resources to satisfy unlimited wants and needs.',
+    keyIdeas: ['Scarcity forces people to make choices.', 'Every choice has an opportunity cost.', 'Demand, supply, incentives, and institutions influence resource allocation.'],
+    example: 'A business chooses whether to spend a limited budget on advertising or new equipment by comparing expected benefits and opportunity costs.',
+    limitation: 'Economic models simplify human behavior and may not predict every real-world decision.'
+  },
+  {
+    terms: ['management', 'business management'],
+    title: 'Management',
+    definition: 'Management is the process of planning, organizing, leading, and controlling resources to achieve goals effectively and efficiently.',
+    keyIdeas: ['Planning sets objectives and actions.', 'Organizing assigns people, responsibilities, and resources.', 'Control compares results with goals and corrects problems.'],
+    example: 'A marketing manager plans a campaign, assigns creative and analytics tasks, monitors conversions, and changes the budget when results fall below target.',
+    limitation: 'Good management cannot guarantee success when market conditions or external risks change.'
+  },
+  {
+    terms: ['accounting'],
+    title: 'Accounting',
+    definition: 'Accounting records, summarizes, and reports financial transactions so users can understand an organization\'s financial position and performance.',
+    keyIdeas: ['Assets are resources, liabilities are obligations, and equity is the owner\'s claim.', 'The accounting equation is Assets = Liabilities + Equity.', 'Reports support decisions about profit, cash, risk, and investment.'],
+    example: 'A shop records sales, inventory purchases, rent, and wages to calculate profit and understand whether the business is financially healthy.',
+    limitation: 'Accounting reports depend on accurate records and may not show every non-financial factor, such as employee morale.'
+  },
+  {
+    terms: ['artificial intelligence', 'what is ai', 'define ai', 'ai'],
+    title: 'Artificial Intelligence',
+    definition: 'Artificial intelligence is the field of creating computer systems that perform tasks such as recognizing patterns, understanding language, making predictions, and supporting decisions.',
+    keyIdeas: ['Data provides examples from which algorithms learn patterns.', 'Training and evaluation test whether a model generalizes to new cases.', 'AI can assist people but needs human review because it can be inaccurate or biased.'],
+    example: 'An online store can recommend products from browsing and purchase behavior, then measure recommendation clicks and completed purchases.',
+    limitation: 'AI output is not automatically true; quality depends on data, model limits, context, and human verification.'
+  },
+  {
+    terms: ['machine learning', 'supervised learning', 'unsupervised learning'],
+    title: 'Machine Learning',
+    definition: 'Machine learning is a branch of AI in which a model learns patterns from data to make predictions or decisions.',
+    keyIdeas: ['Supervised learning uses labeled examples; unsupervised learning finds structure without labels.', 'Training data is used to fit a model and test data checks performance on unseen cases.', 'Overfitting occurs when a model memorizes training data instead of learning useful general patterns.'],
+    example: 'A subscription company can predict which customers may cancel and send a relevant retention offer before cancellation.',
+    limitation: 'A model can produce unfair or unreliable predictions when the data is incomplete, biased, or different from the training data.'
+  },
+  {
+    terms: ['python programming', 'python language', 'programming', 'python'],
+    title: 'Python Programming',
+    definition: 'Python is a high-level programming language used to write readable instructions for automation, web applications, data analysis, and AI.',
+    keyIdeas: ['Variables store values and functions organize reusable behavior.', 'Libraries extend Python for tasks such as data analysis and web development.', 'Testing and clear error handling make programs more reliable.'],
+    example: 'A student can use Python to read a campaign dataset, calculate conversion rates, and create a report for a marketing decision.',
+    limitation: 'Python still requires correct logic, secure dependencies, and suitable performance choices for large or time-sensitive systems.'
+  },
+  {
+    terms: ['html'],
+    title: 'HTML',
+    definition: 'HTML is the markup language used to structure content on web pages, including headings, paragraphs, links, images, and forms.',
+    keyIdeas: ['Elements describe the meaning and structure of content.', 'Attributes provide additional information such as an image source or link destination.', 'Semantic HTML improves accessibility, maintainability, and search understanding.'],
+    example: 'A study page can use a heading for the topic, paragraphs for explanations, and a form for students to submit questions.',
+    limitation: 'HTML defines structure but does not by itself provide visual styling or application behavior.'
+  },
+  {
+    terms: ['database'],
+    title: 'Database',
+    definition: 'A database is an organized collection of data that software can store, search, update, and manage.',
+    keyIdeas: ['Tables or collections organize related records.', 'Queries retrieve or change selected data.', 'Constraints, backups, and access controls protect accuracy and availability.'],
+    example: 'A tutoring app can store student accounts, chat history, courses, and quiz results so each student sees relevant progress.',
+    limitation: 'A database cannot fix incorrect input and requires careful security, backups, and design as the system grows.'
+  },
+  {
+    terms: ['inflation'],
+    title: 'Inflation',
+    definition: 'Inflation is a sustained increase in the general price level, which reduces the purchasing power of money over time.',
+    keyIdeas: ['Demand-pull inflation occurs when demand grows faster than supply.', 'Cost-push inflation can follow higher input, energy, or labor costs.', 'Real values remove price effects; nominal values use current prices.'],
+    example: 'A retailer may review prices, wages, and product sizes when supplier costs rise, while monitoring whether customers reduce purchases.',
+    limitation: 'A single inflation rate does not represent every household\'s actual basket of goods or financial situation.'
+  }
+];
+
+function createLocalKnowledgeReply(message) {
+  const normalizedMessage = String(message || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ');
+  const topic = LOCAL_TUTOR_KNOWLEDGE.find((entry) => entry.terms.some((term) => normalizedMessage.includes(term)));
+
+  if (!topic) return null;
+
+  return `**1. Definition**
+${topic.definition}
+
+**2. Three key ideas**
+- ${topic.keyIdeas[0]}
+- ${topic.keyIdeas[1]}
+- ${topic.keyIdeas[2]}
+
+**3. Business example**
+${topic.example}
+
+**4. Practice example**
+Definition: ${topic.definition}
+Three key points: ${topic.keyIdeas.join(' ')}
+Practical example: ${topic.example}
+Limitation: ${topic.limitation}`;
+}
+
 function createLocalTutorReply(message) {
-  return formatTutorResponse(createLegacyLocalTutorReply(message), message);
+  return formatTutorResponse(createLocalKnowledgeReply(message) || createLegacyLocalTutorReply(message), message);
 }
 
 function handleAiError(res, err, fallbackMsg, requestMessage) {
