@@ -9,6 +9,8 @@
 
 ## 🌟 English Overview & Project Features
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/roshansinghkushwaha18/Study-smart-ai)
+
 **StudySmart AI** is an all-in-one educational platform engineered for college and university students studying **BBA, Digital Marketing, Artificial Intelligence, Economics, and Management**.
 
 ### 🚀 Key Functional Modules
