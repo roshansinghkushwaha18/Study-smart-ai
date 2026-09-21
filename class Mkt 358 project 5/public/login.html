@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Sign in to StudySmart AI Academic Tutor">
+	<title>Sign in | StudySmart AI</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--ink: #1b2b28;
+			--muted: #687572;
+			--line: #d8e1dc;
+			--paper: #fbfcfa;
+			--mint: #dcefe5;
+			--teal: #147d72;
+			--teal-dark: #0e6059;
+			--coral: #e8785b;
+			--danger: #b8443e;
+			--shadow: 0 24px 70px rgba(31, 67, 57, 0.14);
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			min-height: 100vh;
+			margin: 0;
+			color: var(--ink);
+			background:
+				radial-gradient(circle at 15% 18%, rgba(232, 120, 91, 0.17), transparent 25%),
+				radial-gradient(circle at 86% 80%, rgba(20, 125, 114, 0.18), transparent 29%),
+				linear-gradient(135deg, #f3f8f3 0%, #e4f0ea 48%, #f8f7f0 100%);
+			font-family: "DM Sans", sans-serif;
+			display: grid;
+			place-items: center;
+			padding: 32px 18px;
+		}
+
+		body::before {
+			content: "";
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			opacity: 0.28;
+			background-image: linear-gradient(rgba(20, 125, 114, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 125, 114, 0.06) 1px, transparent 1px);
+			background-size: 34px 34px;
+			mask-image: linear-gradient(to bottom, black, transparent 75%);
+		}
+
+		.login-shell {
+			position: relative;
+			width: min(100%, 440px);
+		}
+
+		.login-card {
+			background: rgba(255, 255, 255, 0.88);
+			border: 1px solid rgba(255, 255, 255, 0.8);
+			border-radius: 24px;
+			box-shadow: var(--shadow);
+			padding: clamp(28px, 6vw, 46px);
+			backdrop-filter: blur(16px);
+		}
+
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			margin-bottom: 34px;
+		}
+
+		.brand-mark {
+			width: 44px;
+			height: 44px;
+			display: grid;
+			place-items: center;
+			border-radius: 14px;
+			color: #fff;
+			background: var(--teal);
+			box-shadow: 0 8px 20px rgba(20, 125, 114, 0.25);
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 20px;
+			font-weight: 700;
+		}
+
+		.brand-name {
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 18px;
+			font-weight: 700;
+			letter-spacing: 0;
+		}
+
+		.brand-name span { color: var(--teal); }
+
+		h1 {
+			margin: 0 0 10px;
+			font-family: "Space Grotesk", sans-serif;
+			font-size: clamp(28px, 6vw, 36px);
+			line-height: 1.1;
+			letter-spacing: 0;
+		}
+
+		.intro {
+			margin: 0 0 30px;
+			color: var(--muted);
+			font-size: 15px;
+			line-height: 1.6;
+		}
+
+		.field { margin-bottom: 19px; }
+
+		label {
+			display: block;
+			margin-bottom: 8px;
+			color: #34423f;
+			font-size: 13px;
+			font-weight: 700;
+		}
+
+		input[type="email"],
+		input[type="password"],
+		input[type="text"] {
+			width: 100%;
+			min-height: 50px;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			outline: none;
+			padding: 0 15px;
+			color: var(--ink);
+			background: rgba(255, 255, 255, 0.82);
+			font: inherit;
+			font-size: 15px;
+			transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+		}
+
+		input:focus {
+			border-color: var(--teal);
+			background: #fff;
+			box-shadow: 0 0 0 4px rgba(20, 125, 114, 0.12);
+		}
+
+		.password-wrap { position: relative; }
+
+		.password-wrap input { padding-right: 76px; }
+
+		.toggle-password {
+			position: absolute;
+			top: 50%;
+			right: 10px;
+			transform: translateY(-50%);
+			border: 0;
+			border-radius: 8px;
+			padding: 7px 8px;
+			color: var(--teal-dark);
+			background: transparent;
+			cursor: pointer;
+			font: inherit;
+			font-size: 12px;
+			font-weight: 700;
+		}
+
+		.toggle-password:hover,
+		.toggle-password:focus-visible { background: var(--mint); }
+
+		.field-error {
+			min-height: 18px;
+			margin: 6px 0 0;
+			color: var(--danger);
+			font-size: 12px;
+		}
+
+		.input-invalid { border-color: var(--danger) !important; }
+
+		.form-row {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			margin: 2px 0 26px;
+		}
+
+		.remember {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			margin: 0;
+			color: var(--muted);
+			cursor: pointer;
+			font-size: 13px;
+			font-weight: 500;
+		}
+
+		.remember input { accent-color: var(--teal); }
+
+		a {
+			color: var(--teal-dark);
+			font-size: 13px;
+			font-weight: 700;
+			text-decoration: none;
+		}
+
+		a:hover { text-decoration: underline; }
+
+		.login-button {
+			width: 100%;
+			min-height: 52px;
+			border: 0;
+			border-radius: 12px;
+			color: #fff;
+			background: var(--teal);
+			box-shadow: 0 10px 18px rgba(20, 125, 114, 0.2);
+			cursor: pointer;
+			font: inherit;
+			font-weight: 700;
+			transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+		}
+
+		.login-button:hover { background: var(--teal-dark); transform: translateY(-1px); }
+		.login-button:active { transform: translateY(0); }
+
+		.form-message {
+			min-height: 20px;
+			margin: 14px 0 0;
+			text-align: center;
+			font-size: 13px;
+		}
+
+		.form-message.success { color: var(--teal-dark); }
+		.form-message.error { color: var(--danger); }
+
+		.signup {
+			margin: 28px 0 0;
+			color: var(--muted);
+			text-align: center;
+			font-size: 13px;
+		}
+
+		@media (max-width: 420px) {
+			body { padding: 18px 12px; }
+			.login-card { border-radius: 18px; padding: 28px 22px; }
+			.form-row { align-items: flex-start; flex-direction: column; gap: 12px; }
+		}
+	</style>
+</head>
+<body>
+	<main class="login-shell">
+		<section class="login-card" aria-labelledby="login-title">
+			<div class="brand" aria-label="StudySmart AI">
+				<div class="brand-mark" aria-hidden="true">S</div>
+				<div class="brand-name">Study<span>Smart</span> AI</div>
+			</div>
+
+			<h1 id="login-title">Welcome back</h1>
+			<p class="intro">Sign in to continue your focused learning journey.</p>
+
+			<form id="loginForm" novalidate>
+				<div class="field">
+					<label for="email">Email ID</label>
+					<input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="emailError" required>
+					<p class="field-error" id="emailError" role="alert"></p>
+				</div>
+
+				<div class="field">
+					<label for="password">Password</label>
+					<div class="password-wrap">
+						<input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" aria-describedby="passwordError" required>
+						<button class="toggle-password" id="togglePassword" type="button" aria-controls="password" aria-label="Show password">Show</button>
+					</div>
+					<p class="field-error" id="passwordError" role="alert"></p>
+				</div>
+
+				<div class="form-row">
+					<label class="remember" for="remember">
+						<input id="remember" name="remember" type="checkbox">
+						Remember me
+					</label>
+					<a href="#forgot-password" id="forgotPassword">Forgot Password?</a>
+				</div>
+
+				<button class="login-button" type="submit">Log in</button>
+				<p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+			</form>
+
+			<p class="signup">Don't have an account? <a href="signup.html">Sign up</a></p>
+		</section>
+	</main>
+
+	<script>
+		const form = document.getElementById('loginForm');
+		const email = document.getElementById('email');
+		const password = document.getElementById('password');
+		const emailError = document.getElementById('emailError');
+		const passwordError = document.getElementById('passwordError');
+		const formMessage = document.getElementById('formMessage');
+		const togglePassword = document.getElementById('togglePassword');
+
+		togglePassword.addEventListener('click', () => {
+			const showing = password.type === 'text';
+			password.type = showing ? 'password' : 'text';
+			togglePassword.textContent = showing ? 'Show' : 'Hide';
+			togglePassword.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+		});
+
+		function clearErrors() {
+			emailError.textContent = '';
+			passwordError.textContent = '';
+			email.classList.remove('input-invalid');
+			password.classList.remove('input-invalid');
+			formMessage.textContent = '';
+			formMessage.className = 'form-message';
+		}
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			clearErrors();
+
+			let valid = true;
+			if (!email.value.trim()) {
+				emailError.textContent = 'Please enter your email address.';
+				email.classList.add('input-invalid');
+				valid = false;
+			} else if (!email.validity.valid) {
+				emailError.textContent = 'Please enter a valid email address.';
+				email.classList.add('input-invalid');
+				valid = false;
+			}
+
+			if (!password.value) {
+				passwordError.textContent = 'Please enter your password.';
+				password.classList.add('input-invalid');
+				valid = false;
+			}
+
+			if (!valid) return;
+
+			formMessage.textContent = 'Validation passed. Connecting you to StudySmart AI...';
+			formMessage.className = 'form-message success';
+		});
+
+		document.getElementById('forgotPassword').addEventListener('click', (event) => {
+			event.preventDefault();
+			formMessage.textContent = 'Password reset instructions will be available soon.';
+			formMessage.className = 'form-message success';
+		});
+	</script>
+</body>
+</html>

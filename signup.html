@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Create a StudySmart AI account">
+	<title>Sign up | StudySmart AI</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--ink: #17211f;
+			--muted: #687572;
+			--line: #d8e1dc;
+			--teal: #147d72;
+			--teal-dark: #0e6059;
+			--mint: #dcefe5;
+			--danger: #b8443e;
+			--shadow: 0 24px 70px rgba(31, 67, 57, 0.14);
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			min-height: 100vh;
+			margin: 0;
+			padding: 32px 18px;
+			display: grid;
+			place-items: center;
+			color: var(--ink);
+			background:
+				radial-gradient(circle at 15% 18%, rgba(232, 120, 91, 0.17), transparent 25%),
+				radial-gradient(circle at 86% 80%, rgba(20, 125, 114, 0.18), transparent 29%),
+				linear-gradient(135deg, #f3f8f3 0%, #e4f0ea 48%, #f8f7f0 100%);
+			font-family: "DM Sans", sans-serif;
+		}
+
+		.signup-shell { width: min(100%, 440px); }
+		.signup-card {
+			padding: clamp(28px, 6vw, 46px);
+			border: 1px solid rgba(255, 255, 255, 0.8);
+			border-radius: 24px;
+			background: rgba(255, 255, 255, 0.88);
+			box-shadow: var(--shadow);
+			backdrop-filter: blur(16px);
+		}
+		.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; }
+		.brand-mark {
+			width: 44px;
+			height: 44px;
+			display: grid;
+			place-items: center;
+			border-radius: 14px;
+			color: #fff;
+			background: var(--teal);
+			font: 700 20px "Space Grotesk", sans-serif;
+		}
+		.brand-name { font: 700 18px "Space Grotesk", sans-serif; }
+		.brand-name span { color: var(--teal); }
+		h1 { margin: 0 0 10px; font: 700 clamp(28px, 6vw, 36px)/1.1 "Space Grotesk", sans-serif; }
+		.intro { margin: 0 0 26px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+		.field { margin-bottom: 17px; }
+		label { display: block; margin-bottom: 8px; color: #34423f; font-size: 13px; font-weight: 700; }
+		input {
+			width: 100%;
+			min-height: 50px;
+			padding: 0 15px;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			outline: none;
+			color: var(--ink);
+			background: rgba(255, 255, 255, 0.82);
+			font: inherit;
+			font-size: 15px;
+		}
+		input:focus { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(20, 125, 114, 0.12); }
+		.input-invalid { border-color: var(--danger) !important; }
+		.field-error { min-height: 17px; margin: 5px 0 0; color: var(--danger); font-size: 12px; }
+		.signup-button {
+			width: 100%;
+			min-height: 52px;
+			margin-top: 5px;
+			border: 0;
+			border-radius: 12px;
+			color: #fff;
+			background: var(--teal);
+			box-shadow: 0 10px 18px rgba(20, 125, 114, 0.2);
+			cursor: pointer;
+			font: 700 15px "DM Sans", sans-serif;
+		}
+		.signup-button:hover { background: var(--teal-dark); }
+		.form-message { min-height: 20px; margin: 14px 0 0; text-align: center; font-size: 13px; }
+		.form-message.success { color: var(--teal-dark); }
+		.form-message.error { color: var(--danger); }
+		.login-link { margin: 26px 0 0; color: var(--muted); text-align: center; font-size: 13px; }
+		a { color: var(--teal-dark); font-weight: 700; text-decoration: none; }
+		a:hover { text-decoration: underline; }
+		@media (max-width: 420px) {
+			body { padding: 18px 12px; }
+			.signup-card { padding: 28px 22px; border-radius: 18px; }
+		}
+	</style>
+</head>
+<body>
+	<main class="signup-shell">
+		<section class="signup-card" aria-labelledby="signup-title">
+			<div class="brand" aria-label="StudySmart AI">
+				<div class="brand-mark" aria-hidden="true">S</div>
+				<div class="brand-name">Study<span>Smart</span> AI</div>
+			</div>
+
+			<h1 id="signup-title">Create your account</h1>
+			<p class="intro">Start building a more focused learning routine with StudySmart AI.</p>
+
+			<form id="signupForm" novalidate>
+				<div class="field">
+					<label for="name">Full name</label>
+					<input id="name" name="name" type="text" autocomplete="name" placeholder="Your full name" required>
+					<p class="field-error" id="nameError" role="alert"></p>
+				</div>
+
+				<div class="field">
+					<label for="email">Email ID</label>
+					<input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+					<p class="field-error" id="emailError" role="alert"></p>
+				</div>
+
+				<div class="field">
+					<label for="password">Password</label>
+					<input id="password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" required>
+					<p class="field-error" id="passwordError" role="alert"></p>
+				</div>
+
+				<div class="field">
+					<label for="confirmPassword">Confirm password</label>
+					<input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Enter your password again" required>
+					<p class="field-error" id="confirmPasswordError" role="alert"></p>
+				</div>
+
+				<button class="signup-button" type="submit">Create account</button>
+				<p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+			</form>
+
+			<p class="login-link">Already have an account? <a href="login.html">Log in</a></p>
+		</section>
+	</main>
+
+	<script>
+		const form = document.getElementById('signupForm');
+		const fields = {
+			name: document.getElementById('name'),
+			email: document.getElementById('email'),
+			password: document.getElementById('password'),
+			confirmPassword: document.getElementById('confirmPassword')
+		};
+		const errors = {
+			name: document.getElementById('nameError'),
+			email: document.getElementById('emailError'),
+			password: document.getElementById('passwordError'),
+			confirmPassword: document.getElementById('confirmPasswordError')
+		};
+		const formMessage = document.getElementById('formMessage');
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			Object.keys(fields).forEach((key) => {
+				errors[key].textContent = '';
+				fields[key].classList.remove('input-invalid');
+			});
+			formMessage.textContent = '';
+			formMessage.className = 'form-message';
+
+			let valid = true;
+			if (!fields.name.value.trim()) {
+				errors.name.textContent = 'Please enter your name.';
+				fields.name.classList.add('input-invalid');
+				valid = false;
+			}
+			if (!fields.email.value.trim() || !fields.email.validity.valid) {
+				errors.email.textContent = 'Please enter a valid email address.';
+				fields.email.classList.add('input-invalid');
+				valid = false;
+			}
+			if (fields.password.value.length < 8) {
+				errors.password.textContent = 'Use at least 8 characters.';
+				fields.password.classList.add('input-invalid');
+				valid = false;
+			}
+			if (fields.confirmPassword.value !== fields.password.value) {
+				errors.confirmPassword.textContent = 'Passwords do not match.';
+				fields.confirmPassword.classList.add('input-invalid');
+				valid = false;
+			}
+
+			if (!valid) return;
+			formMessage.textContent = 'Account details validated. You can now log in.';
+			formMessage.className = 'form-message success';
+		});
+	</script>
+</body>
+</html>
