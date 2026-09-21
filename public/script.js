@@ -49,7 +49,7 @@
   function getApiUrl(endpoint) {
     const clean = endpoint.startsWith('/') ? endpoint : '/' + endpoint;
     const localBaseUrl = 'http://127.0.0.1:5000';
-    const deployedBaseUrl = 'https://YOUR-DEPLOYED-BACKEND-URL';
+    const deployedBaseUrl = localBaseUrl;
     const configuredBaseUrl = (window.__APP_CONFIG__ && window.__APP_CONFIG__.API_BASE_URL) || null;
 
     if (configuredBaseUrl) {
