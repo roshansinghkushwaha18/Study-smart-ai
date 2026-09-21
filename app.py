@@ -42,10 +42,22 @@ def local_tutor_reply(message):
     )
 
 
+ALLOWED_ORIGINS = {
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3001",
+    "http://localhost:3001",
+    "http://127.0.0.1:5000",
+    "http://localhost:5000",
+    "https://roshansinghkushwaha18.github.io",
+    "https://www.roshansinghkushwaha18.github.io",
+}
+
+
 @app.after_request
 def allow_local_frontend(response):
     origin = request.headers.get("Origin", "")
-    if origin in {"http://127.0.0.1:3000", "http://localhost:3000", "http://127.0.0.1:3001", "http://localhost:3001", "http://127.0.0.1:5000", "http://localhost:5000"}:
+    if origin in ALLOWED_ORIGINS or origin.startswith("https://roshansinghkushwaha18.github.io"):
         response.headers["Access-Control-Allow-Origin"] = origin
         response.headers["Access-Control-Allow-Headers"] = "Content-Type"
         response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
