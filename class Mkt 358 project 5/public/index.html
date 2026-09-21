@@ -1,0 +1,1449 @@
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StudySmart AI - Advanced AI-powered learning and productivity platform for college students in BBA, Digital Marketing, AI, and Business Studies.">
+  <meta name="keywords" content="StudySmart AI, EdTech, BBA, Digital Marketing, Artificial Intelligence, Student Quiz, Study Planner, Exam Alerts, Pomodoro, PPT Generator">
+  <meta name="author" content="BBA Digital Marketing & AI Student">
+  <title>StudySmart AI — Advanced Academic Learning Platform</title>
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Header & Navigation -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-container">
+      <a href="#home" class="brand-logo" aria-label="StudySmart AI Homepage">
+        <div class="logo-icon-wrap">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span class="sparkle-dot"></span>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">StudySmart <span class="ai-badge">AI</span></span>
+          <span class="brand-sub">BBA & AI Academic Suite</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li><a href="#chat" class="nav-link"><i class="fa-solid fa-robot"></i> AI Tutor</a></li>
+          <li><a href="#notes" class="nav-link"><i class="fa-solid fa-file-lines"></i> Notes</a></li>
+          <li><a href="#quiz" class="nav-link"><i class="fa-solid fa-trophy"></i> Daily 50</a></li>
+          <li><a href="#subjects" class="nav-link"><i class="fa-solid fa-book-bookmark"></i> Subjects</a></li>
+          <li><a href="#tasks" class="nav-link"><i class="fa-solid fa-list-check"></i> Tasks</a></li>
+          <li><a href="#planner" class="nav-link"><i class="fa-solid fa-calendar-days"></i> Planner</a></li>
+          <li><a href="#exam-alerts" class="nav-link"><i class="fa-solid fa-bell"></i> Alerts</a></li>
+          <li><a href="#ppt-generator" class="nav-link"><i class="fa-solid fa-display"></i> PPT Gen</a></li>
+          <li><a href="#career-planning" class="nav-link"><i class="fa-solid fa-compass"></i> Career</a></li>
+          <li><a href="#pomodoro" class="nav-link"><i class="fa-solid fa-clock"></i> Pomodoro</a></li>
+          <li><a href="#dashboard" class="nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <!-- Search Trigger -->
+        <button id="searchTriggerBtn" class="action-btn icon-btn" title="Quick Search (Ctrl + K)" aria-label="Open Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span class="search-key-hint">Ctrl K</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggleBtn" class="action-btn icon-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+
+        <!-- Mobile Hamburger Menu Button -->
+        <button id="mobileMenuBtn" class="mobile-menu-btn" title="Toggle Navigation Menu" aria-label="Toggle Menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+      <div class="mobile-drawer-header">
+        <span class="drawer-title"><i class="fa-solid fa-graduation-cap"></i> StudySmart AI</span>
+        <button id="closeDrawerBtn" class="close-drawer-btn" aria-label="Close Navigation Menu">&times;</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="#home" class="mobile-nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="#chat" class="mobile-nav-link"><i class="fa-solid fa-robot"></i> AI Assistant</a></li>
+        <li><a href="#notes" class="mobile-nav-link"><i class="fa-solid fa-file-lines"></i> Smart Notes</a></li>
+        <li><a href="#quiz" class="mobile-nav-link"><i class="fa-solid fa-trophy"></i> Daily 50 Quiz Challenge</a></li>
+        <li><a href="#subjects" class="mobile-nav-link"><i class="fa-solid fa-book-bookmark"></i> Subjects Manager</a></li>
+        <li><a href="#tasks" class="mobile-nav-link"><i class="fa-solid fa-list-check"></i> Daily Tasks</a></li>
+        <li><a href="#planner" class="mobile-nav-link"><i class="fa-solid fa-calendar-days"></i> Study Planner</a></li>
+        <li><a href="#exam-alerts" class="mobile-nav-link"><i class="fa-solid fa-bell"></i> Exam & Assignment Alerts</a></li>
+        <li><a href="#ppt-generator" class="mobile-nav-link"><i class="fa-solid fa-display"></i> AI PPT Generator</a></li>
+        <li><a href="#career-planning" class="mobile-nav-link"><i class="fa-solid fa-compass"></i> Career Planning</a></li>
+        <li><a href="#pomodoro" class="mobile-nav-link"><i class="fa-solid fa-clock"></i> Pomodoro Timer</a></li>
+        <li><a href="#dashboard" class="mobile-nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard & Analytics</a></li>
+        <li><a href="#about" class="mobile-nav-link"><i class="fa-solid fa-circle-info"></i> About Project</a></li>
+        <li><a href="#contact" class="mobile-nav-link"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+      </ul>
+    </div>
+    <div id="drawerOverlay" class="drawer-overlay"></div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+
+    <!-- ================================================================= -->
+    <!-- 1. HOME / HERO SECTION -->
+    <!-- ================================================================= -->
+    <section id="home" class="section hero-section">
+      <div class="hero-glow-blob blob-1"></div>
+      <div class="hero-glow-blob blob-2"></div>
+      <div class="container hero-container">
+        <div class="hero-badge">
+          <i class="fa-solid fa-bolt"></i> Powered by Official OpenAI API & BBA Digital Marketing Intelligence
+        </div>
+        <h1 class="hero-title">
+          Study Smarter. <span class="gradient-text">Learn Faster.</span> Achieve More.
+        </h1>
+        <p class="hero-subtitle">
+          Your intelligent learning companion for better study habits, personalized assistance, and academic productivity.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#chat" class="btn btn-primary btn-lg"><i class="fa-solid fa-robot"></i> Try AI Assistant</a>
+          <a href="#quiz" class="btn btn-gradient btn-lg"><i class="fa-solid fa-trophy"></i> Daily 50 Quiz Challenge</a>
+          <a href="#notes" class="btn btn-secondary btn-lg"><i class="fa-solid fa-file-pen"></i> Smart Notes</a>
+        </div>
+
+        <!-- Real-Time Local Data Stats Ticker -->
+        <div class="hero-stats-grid">
+          <div class="stat-card glass-card">
+            <div class="stat-icon-wrap icon-purple"><i class="fa-solid fa-check-double"></i></div>
+            <div class="stat-meta">
+              <span class="stat-value" id="heroCompletedTasks">0</span>
+              <span class="stat-label">Tasks Finished</span>
+            </div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon-wrap icon-cyan"><i class="fa-solid fa-trophy"></i></div>
+            <div class="stat-meta">
+              <span class="stat-value" id="heroQuizMastery">0%</span>
+              <span class="stat-label">Quiz Mastery</span>
+            </div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon-wrap icon-emerald"><i class="fa-solid fa-clock"></i></div>
+            <div class="stat-meta">
+              <span class="stat-value" id="heroStudyMinutes">0m</span>
+              <span class="stat-label">Focus Time</span>
+            </div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon-wrap icon-amber"><i class="fa-solid fa-fire"></i></div>
+            <div class="stat-meta">
+              <span class="stat-value" id="heroStreakDays">1</span>
+              <span class="stat-label">Day Streak</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Feature Cards Grid -->
+        <div class="features-grid">
+          <div class="feature-card glass-card">
+            <div class="feature-icon icon-cyan"><i class="fa-solid fa-brain"></i></div>
+            <h2 class="feature-title">AI University Tutor</h2>
+            <p class="feature-desc">Step-by-step academic explanations in English, Hindi, and Hinglish. Tailored for BBA, Digital Marketing, AI, and Economics concepts.</p>
+            <a href="#chat" class="feature-link">Open Chatbot <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+
+          <div class="feature-card glass-card">
+            <div class="feature-icon icon-purple"><i class="fa-solid fa-medal"></i></div>
+            <h2 class="feature-title">Daily 50 Quiz Challenge</h2>
+            <p class="feature-desc">Practice up to 50 questions daily across 8 university disciplines with instant answer analysis, review mode, and streak tracking.</p>
+            <a href="#quiz" class="feature-link">Start Challenge <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+
+          <div class="feature-card glass-card">
+            <div class="feature-icon icon-emerald"><i class="fa-solid fa-bell"></i></div>
+            <h2 class="feature-title">Exam & Deadline Alerts</h2>
+            <p class="feature-desc">Never miss a midterm, submission, or capstone presentation. Real-time countdowns, urgency badges, and overdue detection.</p>
+            <a href="#exam-alerts" class="feature-link">View Deadlines <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+
+          <div class="feature-card glass-card">
+            <div class="feature-icon icon-rose"><i class="fa-solid fa-display"></i></div>
+            <h2 class="feature-title">AI PPT Slide Generator</h2>
+            <p class="feature-desc">Generate professional presentation slide decks with structured bullet points, speaker notes, and interactive presentation preview.</p>
+            <a href="#ppt-generator" class="feature-link">Create Slides <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+
+          <div class="feature-card glass-card">
+            <div class="feature-icon icon-amber"><i class="fa-solid fa-compass"></i></div>
+            <h2 class="feature-title">Career Readiness Roadmaps</h2>
+            <p class="feature-desc">Strategic 6-month roadmap for Digital Marketing, AI, and Strategy careers. Includes practical portfolio projects and STAR interview prep.</p>
+            <a href="#career-planning" class="feature-link">Plan Career <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+
+          <div class="feature-card glass-card">
+            <div class="feature-icon icon-indigo"><i class="fa-solid fa-stopwatch-20"></i></div>
+            <h2 class="feature-title">Pomodoro Focus Timer</h2>
+            <p class="feature-desc">Scientifically proven 25-minute focus intervals with SVG ring animations, Web Audio chime alerts, and automatic dashboard session logging.</p>
+            <a href="#pomodoro" class="feature-link">Start Timer <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 2. AI ASSISTANT CHATBOX -->
+    <!-- ================================================================= -->
+    <section id="chat" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-purple"><i class="fa-solid fa-robot"></i> Official OpenAI Integration</span>
+          <h2 class="section-title">StudySmart AI Academic Tutor</h2>
+          <p class="section-subtitle">Ask questions about Digital Marketing, AI, BBA, Economics, or Assignment concepts in English or Hinglish.</p>
+        </div>
+
+        <div class="chat-wrapper glass-card">
+          <!-- Chat Header Bar -->
+          <div class="chat-header">
+            <div class="chat-status-info">
+              <div class="status-pulse-dot" id="chatStatusDot"></div>
+              <div>
+                <span class="chat-bot-name">StudySmart AI Tutor</span>
+                <span class="chat-bot-status" id="chatStatusText">Connecting to OpenAI...</span>
+              </div>
+            </div>
+            <div class="chat-header-actions">
+              <button id="clearChatBtn" class="btn btn-sm btn-glass" title="Clear Chat History">
+                <i class="fa-solid fa-trash-can"></i> Clear
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Suggestion Starter Chips -->
+          <div class="chat-chips-scroll" id="chatChipsContainer">
+            <button class="chip-btn" data-query="Explain the difference between SEO and SEM with real examples and CAC formula in simple Hinglish.">
+              <i class="fa-solid fa-magnifying-glass-chart"></i> SEO vs SEM (Hinglish)
+            </button>
+            <button class="chip-btn" data-query="Explain SWOT Analysis with a real-world case study of Nike or Apple for college students.">
+              <i class="fa-solid fa-chart-pie"></i> SWOT Analysis Case Study
+            </button>
+            <button class="chip-btn" data-query="What is Machine Learning and Deep Learning? Explain with an intuitive student analogy.">
+              <i class="fa-solid fa-microchip"></i> Machine Learning Analogy
+            </button>
+            <button class="chip-btn" data-query="How to calculate Customer Lifetime Value (LTV) and Return on Ad Spend (ROAS)? Give step-by-step formula.">
+              <i class="fa-solid fa-calculator"></i> LTV & ROAS Formulas
+            </button>
+            <button class="chip-btn" data-query="Explain Porter's 5 Forces Framework with an example for university business exams.">
+              <i class="fa-solid fa-chess-knight"></i> Porter's 5 Forces
+            </button>
+          </div>
+
+          <!-- Chat Messages Container -->
+          <div class="chat-messages-container" id="chatMessages" role="log" aria-live="polite">
+            <!-- Welcome Message -->
+            <div class="chat-message message-bot">
+              <div class="message-avatar"><i class="fa-solid fa-robot"></i></div>
+              <div class="message-bubble">
+                <div class="message-author">StudySmart AI Tutor <span class="message-time">Just now</span></div>
+                <div class="message-body">
+                  <p>Hello! I am your <strong>StudySmart AI Tutor</strong>. I am trained to assist you in <strong>BBA, Digital Marketing (SEO, SEM, Analytics), Artificial Intelligence, Business Economics, and Management</strong>.</p>
+                  <p>Aap mujhse <strong>English ya Hinglish</strong> dono me sawal pooch sakte hain. Pick a starter prompt above or type any question below!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Input Area -->
+          <div class="chat-input-area">
+            <form id="chatForm" class="chat-form">
+              <div class="input-field-wrap">
+                <textarea
+                  id="chatInput"
+                  class="chat-textarea"
+                  placeholder="Ask any question... (Press Enter to send, Shift+Enter for new line)"
+                  rows="2"
+                  maxlength="4000"
+                  required
+                ></textarea>
+                <div class="char-count"><span id="chatCharCount">0</span>/4000</div>
+              </div>
+              <button type="submit" id="chatSendBtn" class="btn btn-primary chat-send-btn" aria-label="Send Message">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 3. SMART NOTES GENERATOR -->
+    <!-- ================================================================= -->
+    <section id="notes" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-cyan"><i class="fa-solid fa-file-pen"></i> AI Revision Assistant</span>
+          <h2 class="section-title">Smart Notes Generator</h2>
+          <p class="section-subtitle">Generate structured, high-yield university revision notes with frameworks, formulas, and real brand case studies.</p>
+        </div>
+
+        <div class="notes-grid">
+          <!-- Input Controls Card -->
+          <div class="notes-controls-card glass-card">
+            <h3 class="card-heading"><i class="fa-solid fa-sliders"></i> Notes Parameters</h3>
+
+            <form id="notesForm" class="form-vertical">
+              <div class="form-group">
+                <label for="notesSubjectSelect" class="form-label">Subject</label>
+                <select id="notesSubjectSelect" class="form-select" required>
+                  <option value="Digital Marketing">Digital Marketing (SEO, SEM, Social)</option>
+                  <option value="Artificial Intelligence">Artificial Intelligence & Data Science</option>
+                  <option value="Business Studies">Business Studies & Marketing Strategy</option>
+                  <option value="Economics">Managerial Economics & Macroeconomics</option>
+                  <option value="Management">Principles of Management & Leadership</option>
+                  <option value="Accounting">Financial Accounting & Cost Management</option>
+                  <option value="English">Business English & Communication</option>
+                  <option value="General Aptitude">Logical Reasoning & Quantitative Aptitude</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="notesTopicInput" class="form-label">Topic Name</label>
+                <input
+                  type="text"
+                  id="notesTopicInput"
+                  class="form-input"
+                  placeholder="e.g., Performance Marketing, SWOT Framework, Transformers in AI"
+                  required
+                  maxlength="150"
+                >
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="notesLevelSelect" class="form-label">Study Level</label>
+                  <select id="notesLevelSelect" class="form-select">
+                    <option value="Undergraduate College">Undergraduate / BBA</option>
+                    <option value="Postgraduate / MBA">Postgraduate / MBA</option>
+                    <option value="Beginner Foundations">Beginner Foundations</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="notesLanguageSelect" class="form-label">Language</label>
+                  <select id="notesLanguageSelect" class="form-select">
+                    <option value="English">English</option>
+                    <option value="Hinglish">Hinglish (Hindi + English)</option>
+                    <option value="Hindi">Hindi</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="notesStyleSelect" class="form-label">Notes Format</label>
+                <select id="notesStyleSelect" class="form-select">
+                  <option value="Comprehensive Revision Notes">Comprehensive Revision Notes</option>
+                  <option value="Exam High-Yield Bullet Summary">Exam High-Yield Bullet Summary</option>
+                  <option value="Case Study & Practical Analysis">Case Study & Practical Analysis</option>
+                </select>
+              </div>
+
+              <div class="btn-group">
+                <button type="submit" id="generateNotesBtn" class="btn btn-primary btn-block">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Smart Notes
+                </button>
+              </div>
+            </form>
+
+            <!-- Saved Notes History in LocalStorage -->
+            <div class="saved-notes-panel">
+              <div class="saved-header">
+                <span class="saved-title"><i class="fa-solid fa-clock-rotate-left"></i> Saved Notes (<span id="savedNotesCount">0</span>)</span>
+                <button id="clearSavedNotesBtn" class="btn-text-sm" title="Clear all saved notes">Clear</button>
+              </div>
+              <ul class="saved-notes-list" id="savedNotesList">
+                <li class="empty-list-notice">No saved notes yet. Generate your first topic above!</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Notes Output Card -->
+          <div class="notes-output-card glass-card">
+            <div class="output-header">
+              <div class="output-meta">
+                <h3 class="output-title" id="notesOutputTitle">Generated Notes</h3>
+                <span class="badge badge-subtle" id="notesOutputBadge">Ready</span>
+              </div>
+              <div class="output-actions">
+                <button id="copyNotesBtn" class="btn btn-sm btn-glass" disabled title="Copy notes to clipboard">
+                  <i class="fa-solid fa-copy"></i> Copy
+                </button>
+                <button id="downloadNotesBtn" class="btn btn-sm btn-glass" disabled title="Download as text file">
+                  <i class="fa-solid fa-download"></i> Download .TXT
+                </button>
+                <button id="clearNotesOutputBtn" class="btn btn-sm btn-glass" disabled title="Clear notes preview">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="notes-content-area" id="notesContentArea">
+              <div class="notes-empty-state" id="notesEmptyState">
+                <i class="fa-solid fa-book-open empty-icon"></i>
+                <h4>Ready to generate high-yield study notes</h4>
+                <p>Select your subject, enter a topic, and click <strong>Generate Smart Notes</strong>. Your notes will appear here formatted with academic depth, formula breakdowns, and revision highlights.</p>
+              </div>
+              <div class="notes-rendered-markdown" id="notesRenderedMarkdown" style="display:none;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 4. DAILY 50 QUIZ CHALLENGE & SUBJECT PRACTICE -->
+    <!-- ================================================================= -->
+    <section id="quiz" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-amber"><i class="fa-solid fa-trophy"></i> Master University Disciplines</span>
+          <h2 class="section-title">Daily 50 Quiz Challenge</h2>
+          <p class="section-subtitle">Practice up to 50 questions daily across 8 subjects. Track your daily challenge progress, test your knowledge, and review solutions.</p>
+        </div>
+
+        <!-- Quiz Navigation & Mode Bar -->
+        <div class="quiz-mode-nav glass-card">
+          <div class="mode-tabs">
+            <button class="mode-tab active" id="tabDaily50" data-mode="daily50">
+              <i class="fa-solid fa-calendar-day"></i> Daily 50 Challenge
+            </button>
+            <button class="mode-tab" id="tabSubjectPractice" data-mode="subject">
+              <i class="fa-solid fa-layer-group"></i> Practice by Subject
+            </button>
+            <button class="mode-tab" id="tabAiCustomQuiz" data-mode="ai">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> AI Custom Quiz
+            </button>
+          </div>
+
+          <!-- Daily 50 Progress Tracker Widget -->
+          <div class="daily-progress-pill">
+            <div class="daily-progress-text">
+              <span>Today's Challenge:</span>
+              <strong id="dailyCompletedCount">0</strong> / 50 Questions Done
+            </div>
+            <div class="mini-progress-bar">
+              <div class="mini-progress-fill" id="dailyProgressFill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subject Filter Pills (Visible in Subject Practice Mode) -->
+        <div class="subject-pills-row" id="quizSubjectPills" style="display: none;">
+          <button class="category-pill active" data-category="all">All Subjects</button>
+          <button class="category-pill" data-category="marketing">Digital Marketing</button>
+          <button class="category-pill" data-category="ai">Artificial Intelligence</button>
+          <button class="category-pill" data-category="business">Business Studies</button>
+          <button class="category-pill" data-category="economics">Economics</button>
+          <button class="category-pill" data-category="management">Management</button>
+          <button class="category-pill" data-category="accounting">Accounting</button>
+          <button class="category-pill" data-category="english">English</button>
+          <button class="category-pill" data-category="aptitude">General Aptitude</button>
+        </div>
+
+        <!-- AI Custom Quiz Generator Bar (Visible in AI Mode) -->
+        <div class="ai-quiz-bar glass-card" id="aiQuizBar" style="display: none;">
+          <div class="ai-quiz-row">
+            <div class="ai-quiz-input-group">
+              <input type="text" id="aiQuizTopicInput" class="form-input" placeholder="Enter any custom topic (e.g. Google Ads Bidding, Neural Networks, GDP calculation)...">
+            </div>
+            <div class="ai-quiz-select-group">
+              <select id="aiQuizCountSelect" class="form-select">
+                <option value="5">5 Questions</option>
+                <option value="10">10 Questions</option>
+              </select>
+            </div>
+            <button id="generateAiQuizBtn" class="btn btn-gradient">
+              <i class="fa-solid fa-microchip"></i> Generate with AI
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Container Active Area -->
+        <div class="quiz-container glass-card" id="quizActiveArea">
+          <!-- Quiz Status Header -->
+          <div class="quiz-status-header">
+            <div class="quiz-left-meta">
+              <span class="badge badge-purple" id="quizActiveTopicBadge">Daily 50 Challenge</span>
+              <span class="quiz-counter">Question <span id="currentQuestionNum">1</span> of <span id="totalQuestionsNum">50</span></span>
+            </div>
+            <div class="quiz-right-meta">
+              <span class="quiz-score-pill"><i class="fa-solid fa-star"></i> Score: <strong id="liveScoreCounter">0</strong></span>
+            </div>
+          </div>
+
+          <!-- Live Progress Bar -->
+          <div class="quiz-progress-track">
+            <div class="quiz-progress-fill" id="quizProgressFill" style="width: 2%;"></div>
+          </div>
+
+          <!-- Question Text Area -->
+          <div class="question-box">
+            <h3 class="question-text" id="questionText">Loading Question...</h3>
+          </div>
+
+          <!-- Multiple Choice Options (4 Options Grid) -->
+          <div class="options-grid" id="quizOptionsGrid" role="radiogroup" aria-label="Quiz Answer Options">
+            <!-- Dynamically populated 4 options -->
+          </div>
+
+          <!-- Instant Feedback / Explanation Box -->
+          <div class="feedback-box" id="quizFeedbackBox" style="display: none;">
+            <div class="feedback-icon" id="feedbackIconWrap">
+              <i class="fa-solid fa-circle-check" id="feedbackIcon"></i>
+            </div>
+            <div class="feedback-content">
+              <h4 class="feedback-verdict" id="feedbackStatus">Correct!</h4>
+              <p class="feedback-explanation" id="feedbackExplanation">Detailed academic explanation here.</p>
+            </div>
+          </div>
+
+          <!-- Quiz Action Navigation Buttons -->
+          <div class="quiz-footer-actions">
+            <button id="prevQuestionBtn" class="btn btn-secondary" disabled>
+              <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+            <div class="quiz-center-btns">
+              <button id="restartQuizBtn" class="btn btn-glass" title="Restart this quiz">
+                <i class="fa-solid fa-rotate-right"></i> Restart
+              </button>
+            </div>
+            <button id="nextQuestionBtn" class="btn btn-primary">
+              Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Final Quiz Score / Results Card (Hidden by default) -->
+        <div class="quiz-result-card glass-card" id="quizResultArea" style="display: none;">
+          <div class="result-header text-center">
+            <div class="result-trophy-wrap">
+              <i class="fa-solid fa-trophy trophy-icon"></i>
+            </div>
+            <h3 class="result-heading">Quiz Challenge Completed!</h3>
+            <p class="result-verdict" id="resultVerdict">Outstanding performance!</p>
+          </div>
+
+          <div class="result-stats-row">
+            <div class="result-metric-box">
+              <span class="metric-num" id="resultScore">0 / 0</span>
+              <span class="metric-tag">Correct Answers</span>
+            </div>
+            <div class="result-metric-box">
+              <span class="metric-num" id="resultPercent">0%</span>
+              <span class="metric-tag">Accuracy Rate</span>
+            </div>
+            <div class="result-metric-box">
+              <span class="metric-num" id="resultStreakDisplay">0</span>
+              <span class="metric-tag">Day Streak</span>
+            </div>
+          </div>
+
+          <div class="result-actions text-center">
+            <button id="retakeQuizBtn" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-rotate-right"></i> Retake Challenge
+            </button>
+            <a href="#dashboard" class="btn btn-secondary btn-lg">
+              <i class="fa-solid fa-chart-line"></i> View in Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 5. NEW SUBJECTS MODULE -->
+    <!-- ================================================================= -->
+    <section id="subjects" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-emerald"><i class="fa-solid fa-book-bookmark"></i> Curriculum Hub</span>
+          <h2 class="section-title">Subjects & Disciplines Manager</h2>
+          <p class="section-subtitle">Manage default university curriculum subjects or add custom course modules to sync across quizzes, notes, and planners.</p>
+        </div>
+
+        <div class="subjects-layout">
+          <!-- Add Subject Form -->
+          <div class="add-subject-card glass-card">
+            <h3 class="card-heading"><i class="fa-solid fa-plus-circle"></i> Add New Subject</h3>
+            <form id="addSubjectForm" class="form-vertical">
+              <div class="form-group">
+                <label for="newSubjectName" class="form-label">Subject Name</label>
+                <input type="text" id="newSubjectName" class="form-input" placeholder="e.g. Python for Marketers, Behavioral Finance" required maxlength="60">
+              </div>
+
+              <div class="form-group">
+                <label for="newSubjectCategory" class="form-label">Category / Stream</label>
+                <select id="newSubjectCategory" class="form-select">
+                  <option value="Marketing">Marketing & Analytics</option>
+                  <option value="Artificial Intelligence">Artificial Intelligence & Tech</option>
+                  <option value="Business">Business & Management</option>
+                  <option value="Finance">Finance & Economics</option>
+                  <option value="General">General Education</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="newSubjectDesc" class="form-label">Description / Course Code</label>
+                <input type="text" id="newSubjectDesc" class="form-input" placeholder="e.g. MKT-358: Digital & AI Strategies" maxlength="120">
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <i class="fa-solid fa-folder-plus"></i> Save Subject
+              </button>
+            </form>
+          </div>
+
+          <!-- Subjects Explorer & List -->
+          <div class="subjects-explorer-card glass-card">
+            <div class="explorer-header">
+              <div class="search-input-wrap">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="searchSubjectsInput" class="form-input" placeholder="Search subjects...">
+              </div>
+              <span class="badge badge-subtle" id="totalSubjectsCount">8 Subjects Active</span>
+            </div>
+
+            <div class="subjects-grid" id="subjectsGrid">
+              <!-- Dynamically populated subject cards -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 6. DAILY TASKS CHECKLIST -->
+    <!-- ================================================================= -->
+    <section id="tasks" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-purple"><i class="fa-solid fa-list-check"></i> Daily Productivity</span>
+          <h2 class="section-title">Daily Student Tasks</h2>
+          <p class="section-subtitle">Keep track of your daily study priorities. Checking off tasks updates your streak and dashboard analytics in real-time.</p>
+        </div>
+
+        <div class="tasks-wrapper glass-card">
+          <!-- Quick Add Task Bar -->
+          <form id="quickTaskForm" class="quick-task-bar">
+            <input type="text" id="quickTaskInput" class="form-input" placeholder="Add a daily study task (e.g., Read SEO Chapter 4, Solve 20 AI MCQs)..." required maxlength="120">
+            <select id="quickTaskPriority" class="form-select task-priority-select">
+              <option value="High">High Priority</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Task</button>
+          </form>
+
+          <!-- Filter & Controls -->
+          <div class="tasks-filter-bar">
+            <div class="tasks-tabs">
+              <button class="tasks-tab active" data-filter="all">All Tasks</button>
+              <button class="tasks-tab" data-filter="pending">Pending</button>
+              <button class="tasks-tab" data-filter="completed">Completed</button>
+            </div>
+            <button id="clearCompletedTasksBtn" class="btn-text-sm"><i class="fa-solid fa-check"></i> Clear Completed</button>
+          </div>
+
+          <!-- Tasks List Container -->
+          <ul class="tasks-list" id="dailyTasksList">
+            <!-- Dynamically populated tasks -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 7. STUDY PLANNER -->
+    <!-- ================================================================= -->
+    <section id="planner" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-cyan"><i class="fa-solid fa-calendar-days"></i> Academic Schedule</span>
+          <h2 class="section-title">Study Planner & Assignments</h2>
+          <p class="section-subtitle">Organize your assignments, course readings, and project milestones with priority sorting and time estimates.</p>
+        </div>
+
+        <div class="planner-layout">
+          <!-- Add Planner Task Form -->
+          <div class="planner-form-card glass-card">
+            <h3 class="card-heading"><i class="fa-solid fa-calendar-plus"></i> Schedule Study Task</h3>
+            <form id="plannerForm" class="form-vertical">
+              <div class="form-group">
+                <label for="plannerSubject" class="form-label">Subject</label>
+                <select id="plannerSubject" class="form-select" required>
+                  <option value="Digital Marketing">Digital Marketing</option>
+                  <option value="Artificial Intelligence">Artificial Intelligence</option>
+                  <option value="Business Studies">Business Studies</option>
+                  <option value="Economics">Economics</option>
+                  <option value="Management">Management</option>
+                  <option value="Accounting">Accounting</option>
+                  <option value="English">English</option>
+                  <option value="General Aptitude">General Aptitude</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="plannerTitle" class="form-label">Task Description</label>
+                <input type="text" id="plannerTitle" class="form-input" placeholder="e.g., Prepare Google Ads SEM Pitch" required maxlength="120">
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="plannerDate" class="form-label">Target Date</label>
+                  <input type="date" id="plannerDate" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="plannerDuration" class="form-label">Est. Minutes</label>
+                  <input type="number" id="plannerDuration" class="form-input" value="45" min="5" max="360" step="5">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="plannerPriority" class="form-label">Priority</label>
+                <select id="plannerPriority" class="form-select">
+                  <option value="High">High Priority</option>
+                  <option value="Medium" selected>Medium Priority</option>
+                  <option value="Low">Low Priority</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <i class="fa-solid fa-plus"></i> Add to Study Plan
+              </button>
+            </form>
+          </div>
+
+          <!-- Planner Tasks Table / List -->
+          <div class="planner-list-card glass-card">
+            <div class="planner-controls-header">
+              <div class="search-input-wrap">
+                <i class="fa-solid fa-filter search-icon"></i>
+                <select id="filterPlannerSubject" class="form-select">
+                  <option value="all">All Subjects</option>
+                  <option value="Digital Marketing">Digital Marketing</option>
+                  <option value="Artificial Intelligence">Artificial Intelligence</option>
+                  <option value="Business Studies">Business Studies</option>
+                  <option value="Economics">Economics</option>
+                  <option value="Management">Management</option>
+                  <option value="Accounting">Accounting</option>
+                  <option value="English">English</option>
+                  <option value="General Aptitude">General Aptitude</option>
+                </select>
+              </div>
+              <div class="sort-wrap">
+                <select id="sortPlannerBy" class="form-select">
+                  <option value="date-asc">Due Date (Soonest)</option>
+                  <option value="date-desc">Due Date (Latest)</option>
+                  <option value="priority">Priority (High to Low)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="planner-items-container" id="plannerItemsList">
+              <!-- Dynamically populated planner tasks -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 8. EXAM ALERTS & ASSIGNMENT DEADLINES -->
+    <!-- ================================================================= -->
+    <section id="exam-alerts" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-rose"><i class="fa-solid fa-bell"></i> Countdown & Deadlines</span>
+          <h2 class="section-title">Exam Alerts & Assignment Deadlines</h2>
+          <p class="section-subtitle">Track midterms, final exam dates, and assignment deadlines with real-time countdown timers and overdue indicators.</p>
+        </div>
+
+        <div class="alerts-layout">
+          <!-- Add Exam/Deadline Form -->
+          <div class="add-alert-card glass-card">
+            <h3 class="card-heading"><i class="fa-solid fa-calendar-check"></i> Add Exam or Deadline</h3>
+            <form id="addAlertForm" class="form-vertical">
+              <div class="form-group">
+                <label for="alertTitle" class="form-label">Event / Exam Title</label>
+                <input type="text" id="alertTitle" class="form-input" placeholder="e.g. MKT-358 Midterm Exam, AI Capstone Defense" required maxlength="100">
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="alertType" class="form-label">Event Type</label>
+                  <select id="alertType" class="form-select">
+                    <option value="Exam">University Exam</option>
+                    <option value="Assignment">Assignment Submission</option>
+                    <option value="Presentation">PPT / Project Defense</option>
+                    <option value="Quiz">Class Quiz / Test</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="alertSubject" class="form-label">Subject</label>
+                  <select id="alertSubject" class="form-select" required>
+                    <option value="Digital Marketing">Digital Marketing</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Business Studies">Business Studies</option>
+                    <option value="Economics">Economics</option>
+                    <option value="Management">Management</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="English">English</option>
+                    <option value="General Aptitude">General Aptitude</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="alertDate" class="form-label">Date</label>
+                  <input type="date" id="alertDate" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="alertTime" class="form-label">Time</label>
+                  <input type="time" id="alertTime" class="form-input" value="09:30" required>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="alertPriority" class="form-label">Priority</label>
+                  <select id="alertPriority" class="form-select">
+                    <option value="High">High / Critical</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="alertVenue" class="form-label">Venue / Room / URL</label>
+                  <input type="text" id="alertVenue" class="form-input" placeholder="e.g. Hall 4B or Blackboard" maxlength="80">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-gradient btn-block">
+                <i class="fa-solid fa-bell"></i> Set Academic Alert
+              </button>
+            </form>
+          </div>
+
+          <!-- Alerts Display Area -->
+          <div class="alerts-display-card glass-card">
+            <div class="alerts-filter-header">
+              <div class="alerts-tabs">
+                <button class="alert-tab active" data-filter="all">All Events</button>
+                <button class="alert-tab" data-filter="exam">Exams</button>
+                <button class="alert-tab" data-filter="assignment">Assignments</button>
+                <button class="alert-tab" data-filter="overdue">Overdue</button>
+              </div>
+              <span class="badge badge-subtle" id="activeAlertsCount">0 Upcoming</span>
+            </div>
+
+            <div class="alerts-cards-list" id="alertsCardsList">
+              <!-- Dynamically populated exam and assignment cards -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 9. PPT GENERATOR -->
+    <!-- ================================================================= -->
+    <section id="ppt-generator" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-indigo"><i class="fa-solid fa-display"></i> Executive Presentation Deck</span>
+          <h2 class="section-title">AI Presentation Content Generator</h2>
+          <p class="section-subtitle">Create structured presentation slide decks with key talking points, speaker notes, and interactive slide preview.</p>
+        </div>
+
+        <div class="ppt-layout">
+          <!-- PPT Input Form -->
+          <div class="ppt-form-card glass-card">
+            <h3 class="card-heading"><i class="fa-solid fa-sliders"></i> Presentation Setup</h3>
+            <form id="pptForm" class="form-vertical">
+              <div class="form-group">
+                <label for="pptTopicInput" class="form-label">Presentation Topic</label>
+                <input type="text" id="pptTopicInput" class="form-input" placeholder="e.g., Performance Marketing Strategies for Gen Z, AI in Retail" required maxlength="150">
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="pptSubjectSelect" class="form-label">Subject</label>
+                  <select id="pptSubjectSelect" class="form-select">
+                    <option value="Digital Marketing">Digital Marketing</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Business Strategy">Business Strategy & Case Studies</option>
+                    <option value="Economics">Managerial Economics</option>
+                    <option value="Management">Organizational Management</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="pptSlideCountSelect" class="form-label">Slide Count</label>
+                  <select id="pptSlideCountSelect" class="form-select">
+                    <option value="4">4 Slides (Quick Pitch)</option>
+                    <option value="6" selected>6 Slides (Standard Presentation)</option>
+                    <option value="8">8 Slides (Comprehensive Deck)</option>
+                    <option value="10">10 Slides (Capstone Defense)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="pptLanguageSelect" class="form-label">Language</label>
+                  <select id="pptLanguageSelect" class="form-select">
+                    <option value="English">English</option>
+                    <option value="Hinglish">Hinglish</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="pptLevelSelect" class="form-label">Academic Level</label>
+                  <select id="pptLevelSelect" class="form-select">
+                    <option value="Undergraduate / BBA">Undergraduate / BBA</option>
+                    <option value="MBA / Executive">MBA / Executive</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="pptRequirementsInput" class="form-label">Special Focus / Key Requirements</label>
+                <input type="text" id="pptRequirementsInput" class="form-input" placeholder="e.g., Include real Indian brand examples (Zomato/Nykaa), focus on ROI metrics" maxlength="150">
+              </div>
+
+              <button type="submit" id="generatePptBtn" class="btn btn-primary btn-block">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Presentation Deck
+              </button>
+            </form>
+          </div>
+
+          <!-- PPT Output & Slides Viewer Card -->
+          <div class="ppt-output-card glass-card">
+            <div class="output-header">
+              <div>
+                <h3 class="output-title" id="pptDeckTitle">Generated Deck</h3>
+                <span class="badge badge-subtle" id="pptSlideCountBadge">0 Slides</span>
+              </div>
+              <div class="output-actions">
+                <button id="previewSlidesModalBtn" class="btn btn-sm btn-gradient" disabled title="Open interactive slide presentation preview">
+                  <i class="fa-solid fa-play"></i> Present Slides
+                </button>
+                <button id="copyPptTextBtn" class="btn btn-sm btn-glass" disabled title="Copy full presentation content">
+                  <i class="fa-solid fa-copy"></i> Copy Content
+                </button>
+                <button id="downloadPptTxtBtn" class="btn btn-sm btn-glass" disabled title="Download formatted presentation text file">
+                  <i class="fa-solid fa-download"></i> Download .TXT
+                </button>
+              </div>
+            </div>
+
+            <div class="ppt-content-area" id="pptContentArea">
+              <div class="notes-empty-state" id="pptEmptyState">
+                <i class="fa-solid fa-file-powerpoint empty-icon"></i>
+                <h4>Ready to generate your slide deck</h4>
+                <p>Fill in your presentation topic and slide count, then click <strong>Generate Presentation Deck</strong>. You can inspect bullet points, speaker notes, and preview the full deck slide by slide.</p>
+              </div>
+
+              <div class="slides-overview-list" id="slidesOverviewList" style="display: none;">
+                <!-- Dynamically populated slide summary cards -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 10. CAREER PLANNING MODULE -->
+    <!-- ================================================================= -->
+    <section id="career-planning" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-amber"><i class="fa-solid fa-compass"></i> Student Career Launchpad</span>
+          <h2 class="section-title">Career Planning & Roadmap</h2>
+          <p class="section-subtitle">Structured career development for BBA Digital Marketing, AI, and Business Analytics students.</p>
+        </div>
+
+        <div class="career-layout">
+          <!-- Career Goal Picker & Form -->
+          <div class="career-form-card glass-card">
+            <h3 class="card-heading"><i class="fa-solid fa-bullseye"></i> Select Career Goal</h3>
+            <div class="career-presets-grid" id="careerPresetsGrid">
+              <button class="preset-career-btn active" data-track="digital_marketing">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Digital Marketing Strategist</span>
+              </button>
+              <button class="preset-career-btn" data-track="ai_prompt">
+                <i class="fa-solid fa-microchip"></i>
+                <span>AI & Prompt Engineer</span>
+              </button>
+              <button class="preset-career-btn" data-track="marketing_analytics">
+                <i class="fa-solid fa-database"></i>
+                <span>Marketing Analytics Manager</span>
+              </button>
+              <button class="preset-career-btn" data-track="business_consultant">
+                <i class="fa-solid fa-briefcase"></i>
+                <span>Business Consultant / Strategy</span>
+              </button>
+              <button class="preset-career-btn" data-track="startup_founder">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Tech Entrepreneur / Startup Founder</span>
+              </button>
+            </div>
+
+            <!-- Custom Career AI Form -->
+            <form id="customCareerForm" class="form-vertical" style="margin-top: 1.25rem;">
+              <div class="form-group">
+                <label for="customCareerInput" class="form-label">Or Enter Custom Dream Role</label>
+                <input type="text" id="customCareerInput" class="form-input" placeholder="e.g. Growth Marketing Lead, Product Manager, EdTech AI Specialist" maxlength="100">
+              </div>
+              <button type="submit" id="generateCustomCareerBtn" class="btn btn-primary btn-block">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Custom AI Career Roadmap
+              </button>
+            </form>
+          </div>
+
+          <!-- Career Roadmap Details Card -->
+          <div class="career-details-card glass-card" id="careerDetailsArea">
+            <div class="career-header-row">
+              <div>
+                <h3 class="career-role-title" id="careerRoleTitle">Digital Marketing Strategist</h3>
+                <p class="career-role-desc" id="careerRoleDesc">Specialist in data-driven user acquisition, paid search (SEM), organic visibility (SEO), and full-funnel retention marketing.</p>
+              </div>
+              <div class="career-score-badge">
+                <span class="badge-num" id="careerProgressScore">0%</span>
+                <span class="badge-label">Readiness Score</span>
+              </div>
+            </div>
+
+            <!-- Interactive Skills Assessment Checklist -->
+            <div class="career-section-block">
+              <h4 class="block-title"><i class="fa-solid fa-list-check"></i> Core Skills Assessment</h4>
+              <p class="block-sub">Check off skills you currently possess or are currently learning:</p>
+              <div class="skills-checklist-grid" id="careerSkillsChecklist">
+                <!-- Dynamically populated skills -->
+              </div>
+            </div>
+
+            <!-- 6-Month Learning Roadmap -->
+            <div class="career-section-block">
+              <h4 class="block-title"><i class="fa-solid fa-route"></i> 6-Month Structured Learning Roadmap</h4>
+              <div class="roadmap-timeline" id="careerRoadmapTimeline">
+                <!-- Dynamically populated milestones -->
+              </div>
+            </div>
+
+            <!-- Recommended Student Projects -->
+            <div class="career-section-block">
+              <h4 class="block-title"><i class="fa-solid fa-flask"></i> High-Impact Capstone Projects for Portfolio</h4>
+              <div class="projects-grid" id="careerProjectsGrid">
+                <!-- Dynamically populated projects -->
+              </div>
+            </div>
+
+            <!-- Interview Preparation STAR Method -->
+            <div class="career-section-block">
+              <h4 class="block-title"><i class="fa-solid fa-comments"></i> Key Interview Questions & Guidance</h4>
+              <div class="interview-accordion" id="careerInterviewAccordion">
+                <!-- Dynamically populated interview questions -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 11. POMODORO TIMER -->
+    <!-- ================================================================= -->
+    <section id="pomodoro" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-emerald"><i class="fa-solid fa-clock"></i> Focus Booster</span>
+          <h2 class="section-title">Pomodoro Study Timer</h2>
+          <p class="section-subtitle">Enhance retention and study stamina with the 25-minute focus technique and automatic session logging.</p>
+        </div>
+
+        <div class="pomodoro-wrapper glass-card text-center">
+          <!-- Mode Tabs -->
+          <div class="pomo-mode-tabs">
+            <button class="pomo-tab active" id="pomoFocusTab" data-mode="focus">25m Focus</button>
+            <button class="pomo-tab" id="pomoShortBreakTab" data-mode="shortBreak">5m Short Break</button>
+            <button class="pomo-tab" id="pomoLongBreakTab" data-mode="longBreak">15m Long Break</button>
+          </div>
+
+          <!-- Circular SVG Progress Ring -->
+          <div class="timer-display-wrap">
+            <svg class="timer-svg" viewBox="0 0 240 240">
+              <circle class="timer-track" cx="120" cy="120" r="105" fill="none" stroke-width="8"></circle>
+              <circle class="timer-indicator" id="timerProgressRing" cx="120" cy="120" r="105" fill="none" stroke-width="8" stroke-dasharray="660" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="timer-time-center">
+              <div class="timer-digits" id="timerDigits">25:00</div>
+              <div class="timer-mode-label" id="timerStatusLabel">Ready to Focus</div>
+            </div>
+          </div>
+
+          <!-- Timer Controls -->
+          <div class="timer-controls-row">
+            <button id="timerStartBtn" class="btn btn-primary btn-lg"><i class="fa-solid fa-play"></i> Start</button>
+            <button id="timerPauseBtn" class="btn btn-secondary btn-lg" style="display: none;"><i class="fa-solid fa-pause"></i> Pause</button>
+            <button id="timerResetBtn" class="btn btn-glass btn-lg"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+            <button id="timerSkipBtn" class="btn btn-glass btn-lg" title="Skip to next session"><i class="fa-solid fa-forward-step"></i> Skip</button>
+          </div>
+
+          <!-- Completed Cycles Counter -->
+          <div class="pomo-meta-row">
+            <div class="pomo-metric">
+              <span class="metric-val" id="pomoCompletedCycles">0</span>
+              <span class="metric-label">Sessions Done Today</span>
+            </div>
+            <div class="pomo-metric">
+              <span class="metric-val" id="pomoTotalMinutes">0m</span>
+              <span class="metric-label">Total Study Time</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 12. DASHBOARD & PROGRESS ANALYTICS -->
+    <!-- ================================================================= -->
+    <section id="dashboard" class="section tool-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-cyan"><i class="fa-solid fa-chart-line"></i> Academic Analytics</span>
+          <h2 class="section-title">Student Dashboard & Progress</h2>
+          <p class="section-subtitle">Real-time local analytics tracking your tasks, quizzes, study sessions, and exam deadlines.</p>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- Stat Card 1: Completed Tasks -->
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-header">
+              <span class="dash-stat-title">Tasks Completed</span>
+              <i class="fa-solid fa-list-check dash-stat-icon icon-purple"></i>
+            </div>
+            <div class="dash-stat-body">
+              <span class="dash-stat-num" id="dashCompletedTasks">0</span>
+              <span class="dash-stat-sub" id="dashTasksTotalSub">0 total in planner</span>
+            </div>
+            <div class="dash-progress-wrap">
+              <div class="dash-progress-bar" id="taskProgressBar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Stat Card 2: Quiz Mastery -->
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-header">
+              <span class="dash-stat-title">Average Quiz Score</span>
+              <i class="fa-solid fa-award dash-stat-icon icon-cyan"></i>
+            </div>
+            <div class="dash-stat-body">
+              <span class="dash-stat-num" id="dashAvgScore">0%</span>
+              <span class="dash-stat-sub" id="dashQuizzesTakenSub">0 quizzes taken</span>
+            </div>
+            <div class="dash-progress-wrap">
+              <div class="dash-progress-bar bar-cyan" id="quizProgressBar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Stat Card 3: Daily 50 Challenge Progress -->
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-header">
+              <span class="dash-stat-title">Daily 50 Progress</span>
+              <i class="fa-solid fa-trophy dash-stat-icon icon-amber"></i>
+            </div>
+            <div class="dash-stat-body">
+              <span class="dash-stat-num" id="dashDaily50Count">0 / 50</span>
+              <span class="dash-stat-sub" id="dashDaily50Sub">0% of daily target</span>
+            </div>
+            <div class="dash-progress-wrap">
+              <div class="dash-progress-bar bar-amber" id="daily50ProgressBar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Stat Card 4: Study Sessions & Focus Hours -->
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-header">
+              <span class="dash-stat-title">Focus Study Sessions</span>
+              <i class="fa-solid fa-clock dash-stat-icon icon-emerald"></i>
+            </div>
+            <div class="dash-stat-body">
+              <span class="dash-stat-num" id="dashStudySessions">0</span>
+              <span class="dash-stat-sub" id="dashStudyMinutesSub">0 minutes logged</span>
+            </div>
+            <div class="dash-progress-wrap">
+              <div class="dash-progress-bar bar-emerald" id="pomoProgressBar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Stat Card 5: Study Streak -->
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-header">
+              <span class="dash-stat-title">Active Study Streak</span>
+              <i class="fa-solid fa-fire dash-stat-icon icon-rose"></i>
+            </div>
+            <div class="dash-stat-body">
+              <span class="dash-stat-num" id="dashStreakDays">1</span>
+              <span class="dash-stat-sub">Consecutive Days</span>
+            </div>
+            <div class="dash-progress-wrap">
+              <div class="dash-progress-bar bar-rose" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <!-- Stat Card 6: Upcoming Exams & Deadlines -->
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-header">
+              <span class="dash-stat-title">Upcoming Exams</span>
+              <i class="fa-solid fa-bell dash-stat-icon icon-indigo"></i>
+            </div>
+            <div class="dash-stat-body">
+              <span class="dash-stat-num" id="dashUpcomingExams">0</span>
+              <span class="dash-stat-sub" id="dashExamsSub">0 upcoming, 0 overdue</span>
+            </div>
+            <div class="dash-progress-wrap">
+              <div class="dash-progress-bar bar-indigo" style="width: 100%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Feed -->
+        <div class="activity-log-card glass-card" style="margin-top: 2rem;">
+          <div class="activity-header">
+            <h3 class="card-heading"><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity Log</h3>
+            <button id="clearActivityBtn" class="btn-text-sm"><i class="fa-solid fa-trash-can"></i> Clear Log</button>
+          </div>
+          <ul class="activity-timeline" id="activityTimeline">
+            <!-- Dynamically populated activity logs -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 13. ABOUT SECTION -->
+    <!-- ================================================================= -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-purple"><i class="fa-solid fa-circle-info"></i> Academic Project Showcase</span>
+          <h2 class="section-title">About StudySmart AI</h2>
+          <p class="section-subtitle">Developed for university coursework in BBA Digital Marketing & Artificial Intelligence.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card glass-card">
+            <h3 class="about-card-title"><i class="fa-solid fa-graduation-cap icon-purple"></i> Academic Context</h3>
+            <p>StudySmart AI was conceptualized to address real workflow challenges university students experience when studying multidisciplinary subjects like <strong>Digital Marketing (SEO, SEM, Social Media, Google Ads, Analytics)</strong> and <strong>Artificial Intelligence & Machine Learning</strong>.</p>
+            <p>It combines server-side AI reasoning via OpenAI with client-side zero-database privacy through browser <code>LocalStorage</code>.</p>
+          </div>
+
+          <div class="about-card glass-card">
+            <h3 class="about-card-title"><i class="fa-solid fa-code icon-cyan"></i> Technology Architecture</h3>
+            <ul class="tech-stack-list">
+              <li><strong>Frontend:</strong> Semantic HTML5, CSS3 Glassmorphism, Vanilla JavaScript (ES6 Modules)</li>
+              <li><strong>Backend Server:</strong> Node.js, Express.js with CORS, Dotenv, and Request Sanitization</li>
+              <li><strong>AI Engine:</strong> Official OpenAI JavaScript SDK (Configurable Model: <code>gpt-4o-mini</code>)</li>
+              <li><strong>Persistence:</strong> Resilient <code>LocalStorage</code> wrapper with corrupted JSON auto-recovery</li>
+              <li><strong>Audio:</strong> Web Audio Synthesizer API for lightweight, zero-dependency focus chimes</li>
+            </ul>
+          </div>
+
+          <div class="about-card glass-card">
+            <h3 class="about-card-title"><i class="fa-solid fa-shield-halved icon-emerald"></i> Security & Ethics Notice</h3>
+            <p><strong>API Key Privacy:</strong> All API keys remain strictly on the backend server and are never exposed to client browsers.</p>
+            <p><strong>Academic Integrity:</strong> The platform is designed to provide guided explanations, formulas, and frameworks to stimulate understanding rather than enabling blind copying.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 14. CONTACT SECTION -->
+    <!-- ================================================================= -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-cyan"><i class="fa-solid fa-envelope"></i> Reach Out</span>
+          <h2 class="section-title">Contact & Student Feedback</h2>
+          <p class="section-subtitle">Have feedback or suggestions on how to improve StudySmart AI? Send a note below!</p>
+        </div>
+
+        <div class="contact-wrapper glass-card">
+          <form id="contactForm" class="contact-form">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="contactName" class="form-label">Full Name</label>
+                <input type="text" id="contactName" class="form-input" placeholder="e.g. Rahul Sharma" required maxlength="80">
+              </div>
+              <div class="form-group">
+                <label for="contactEmail" class="form-label">Email Address</label>
+                <input type="email" id="contactEmail" class="form-input" placeholder="e.g. rahul.student@college.edu" required maxlength="100">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactSubject" class="form-label">Subject</label>
+              <input type="text" id="contactSubject" class="form-input" placeholder="e.g. Feature Suggestion for Marketing Quiz" required maxlength="120">
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage" class="form-label">Message</label>
+              <textarea id="contactMessage" class="form-textarea" rows="4" placeholder="Write your feedback or inquiry here..." required maxlength="1000"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fa-solid fa-paper-plane"></i> Submit Feedback
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <div class="brand-logo">
+          <div class="logo-icon-wrap">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <span class="brand-name">StudySmart AI</span>
+        </div>
+        <p class="footer-tagline">Academic excellence through artificial intelligence. Empowering BBA Digital Marketing & AI students.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-col-title">Core Modules</h4>
+        <ul>
+          <li><a href="#chat">AI Assistant</a></li>
+          <li><a href="#notes">Smart Notes</a></li>
+          <li><a href="#quiz">Daily 50 Quiz</a></li>
+          <li><a href="#ppt-generator">PPT Generator</a></li>
+          <li><a href="#career-planning">Career Roadmaps</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-col-title">Study Tools</h4>
+        <ul>
+          <li><a href="#tasks">Daily Tasks</a></li>
+          <li><a href="#planner">Study Planner</a></li>
+          <li><a href="#exam-alerts">Exam Alerts</a></li>
+          <li><a href="#pomodoro">Pomodoro Timer</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-col-title">Project Info</h4>
+        <ul>
+          <li><a href="#about">Academic Credits</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><span class="footer-badge">Course: MKT-358</span></li>
+          <li><span class="footer-badge">Year: 2026</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom text-center">
+      <p>&copy; 2026 StudySmart AI. Created by a BBA Digital Marketing & AI Student. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ================================================================= -->
+  <!-- MODALS -->
+  <!-- ================================================================= -->
+
+  <!-- Global Quick Search Modal (Ctrl + K) -->
+  <div id="searchModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
+    <div class="search-modal-box glass-card">
+      <div class="search-modal-header">
+        <i class="fa-solid fa-magnifying-glass search-modal-icon"></i>
+        <input type="text" id="globalSearchInput" class="search-modal-input" placeholder="Search features, subjects, tasks, or study terms... (Esc to close)">
+        <button id="closeSearchModalBtn" class="modal-close-btn" aria-label="Close Search">&times;</button>
+      </div>
+      <div class="search-modal-results" id="globalSearchResults">
+        <div class="search-results-hint">Type a keyword like <em>"marketing"</em>, <em>"quiz"</em>, <em>"exam"</em>, or <em>"notes"</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide Deck Presentation Viewer Modal -->
+  <div id="slidesModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="slideModalTitle">
+    <div class="slides-modal-box glass-card">
+      <div class="slides-modal-header">
+        <div class="slides-modal-meta">
+          <span class="badge badge-purple" id="slidesSubjectBadge">Presentation</span>
+          <span class="slides-counter-badge" id="slidesCounterBadge">Slide 1 of 6</span>
+        </div>
+        <button id="closeSlidesModalBtn" class="modal-close-btn" aria-label="Close Presentation Preview">&times;</button>
+      </div>
+
+      <!-- Slide Viewport -->
+      <div class="slide-viewport" id="slideViewport">
+        <div class="slide-card-presentation">
+          <h2 class="slide-presentation-title" id="slidePresTitle">Slide Title</h2>
+          <ul class="slide-presentation-bullets" id="slidePresBullets">
+            <!-- Bullet points rendered here -->
+          </ul>
+          <div class="slide-visual-recommendation" id="slidePresVisual">
+            <i class="fa-solid fa-image"></i> <span id="slideVisualText">Visual Concept</span>
+          </div>
+          <div class="slide-speaker-notes-box">
+            <strong><i class="fa-solid fa-microphone-lines"></i> Speaker Notes:</strong>
+            <p id="slideSpeakerNotesText">Notes here...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide Modal Navigation Controls -->
+      <div class="slides-modal-footer">
+        <button id="slidePrevBtn" class="btn btn-secondary"><i class="fa-solid fa-chevron-left"></i> Previous</button>
+        <div class="slide-dots-container" id="slideDotsContainer">
+          <!-- Dots rendered dynamically -->
+        </div>
+        <button id="slideNextBtn" class="btn btn-primary">Next <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Script -->
+  <script src="script.js"></script>
+  <th eme-switcher></theme-switcher>
+</body>
+</body>
+</html>
