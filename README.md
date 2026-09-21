@@ -130,7 +130,16 @@ No billing is required for this mode.
 - **Karan**: Aapke OpenAI account me credits khatam ho gaye hain ya free trial expire ho gaya hai.
 - **Solution**: [OpenAI Billing Dashboard](https://platform.openai.com/account/billing) me jakar credits check karein.
 
-### 4. Browser Console Kaise Check Karein?
+### 4. GitHub Pages Par Full AI Backend Enable Karna
+GitHub Pages sirf static frontend host karta hai. Full AI endpoints enable karne ke liye repository ko Render par Blueprint ke roop me deploy karein:
+
+1. Render Dashboard me **New > Blueprint** kholein.
+2. Repository `roshansinghkushwaha18/Study-smart-ai` select karein.
+3. `render.yaml` ko apply karein aur `OPENAI_API_KEY` ko Render secret ke roop me add karein.
+4. Service ka URL `https://studysmart-ai-api.onrender.com` rakhein, ya custom URL ko `public/script.js` ke `deployedBaseUrl` me update karein.
+5. Deploy complete hone ke baad GitHub Pages frontend automatically backend se connect hoga.
+
+### 5. Browser Console Kaise Check Karein?
 - Browser me `F12` ya `Right Click -> Inspect` dabayein, aur **Console** tab par click karein. Wahan aapko frontend ke saare logs safely dikhenge.
 
 ---
