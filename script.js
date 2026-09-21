@@ -49,7 +49,6 @@
   function getApiUrl(endpoint) {
     const clean = endpoint.startsWith('/') ? endpoint : '/' + endpoint;
     const localBaseUrl = 'http://127.0.0.1:5000';
-    const deployedBaseUrl = localBaseUrl;
     const configuredBaseUrl = (window.__APP_CONFIG__ && window.__APP_CONFIG__.API_BASE_URL) || null;
 
     if (configuredBaseUrl) {
@@ -65,7 +64,7 @@
     }
 
     if (window.location.hostname.endsWith('github.io')) {
-      return `${deployedBaseUrl.replace(/\/+$/, '')}${clean}`;
+      return clean;
     }
 
     return clean;
@@ -342,6 +341,13 @@
     },
 
     async checkServerHealth() {
+      if (window.location.hostname.endsWith('github.io')) {
+        this.isAiReady = true;
+        if (this.statusText) this.statusText.textContent = 'Offline study mode ready';
+        if (this.statusDot) this.statusDot.style.background = '#f59e0b';
+        return;
+      }
+
       const candidateUrls = [
         getApiUrl('/api/health'),
         'http://localhost:5000/api/health',
