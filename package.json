@@ -1,0 +1,33 @@
+{
+  "name": "studysmart-ai",
+  "version": "2.0.0",
+  "description": "StudySmart AI - Advanced EdTech & Academic Productivity Platform for University Students with OpenAI API Integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "edtech",
+    "openai",
+    "chatgpt",
+    "study-assistant",
+    "digital-marketing",
+    "bba",
+    "artificial-intelligence",
+    "quiz-50",
+    "exam-alerts",
+    "ppt-generator",
+    "career-planning",
+    "pomodoro",
+    "ai"
+  ],
+  "author": "BBA Digital Marketing & AI Student",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "openai": "^4.86.0"
+  }
+}
