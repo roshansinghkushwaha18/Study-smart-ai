@@ -48,19 +48,78 @@
   // =========================================================================
   function getApiUrl(endpoint) {
     const clean = endpoint.startsWith('/') ? endpoint : '/' + endpoint;
-    const host = '127.0.0.1';
-    const port = '5000';
+    const localBaseUrl = 'http://127.0.0.1:5000';
+    const deployedBaseUrl = 'https://YOUR-DEPLOYED-BACKEND-URL';
+    const configuredBaseUrl = (window.__APP_CONFIG__ && window.__APP_CONFIG__.API_BASE_URL) || null;
 
-    // The backend is intentionally fixed to http://127.0.0.1:5000 for this local-only app.
+    if (configuredBaseUrl) {
+      return `${configuredBaseUrl.replace(/\/+$/, '')}${clean}`;
+    }
+
     if (window.location.protocol === 'file:') {
-      return `http://${host}:${port}${clean}`;
+      return `${localBaseUrl}${clean}`;
     }
 
     if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
-      return `http://${host}:${port}${clean}`;
+      return `${localBaseUrl}${clean}`;
+    }
+
+    if (window.location.hostname.endsWith('github.io')) {
+      return `${deployedBaseUrl.replace(/\/+$/, '')}${clean}`;
     }
 
     return clean;
+  }
+
+  function getOfflineTutorReply(question) {
+    const text = String(question || '').trim();
+    const normalized = text.toLowerCase();
+    const topics = [
+      {
+        matches: ['photosynthesis', 'plant food'],
+        title: 'Photosynthesis',
+        definition: 'Photosynthesis is the process in which green plants use sunlight, water, and carbon dioxide to make glucose and release oxygen.',
+        points: ['Chlorophyll captures light energy.', 'Water and carbon dioxide are raw materials.', 'Glucose stores energy and oxygen is released.'],
+        example: 'A crop needs suitable light, water, temperature, and carbon dioxide to grow efficiently.',
+        limitation: 'The process slows when light, water, temperature, or carbon dioxide is unsuitable.'
+      },
+      {
+        matches: ['what is ai', 'artificial intelligence', 'define ai'],
+        title: 'Artificial Intelligence',
+        definition: 'Artificial intelligence creates computer systems that recognize patterns, understand language, make predictions, and support decisions.',
+        points: ['Data provides examples.', 'Algorithms learn patterns and produce outputs.', 'Human review is needed because AI can be inaccurate or biased.'],
+        example: 'An online store can recommend products from browsing and purchase behavior.',
+        limitation: 'AI output is not automatically true; its quality depends on data, model limits, and verification.'
+      },
+      {
+        matches: ['machine learning', 'supervised learning', 'unsupervised learning'],
+        title: 'Machine Learning',
+        definition: 'Machine learning is a branch of AI in which models learn patterns from data to make predictions or decisions.',
+        points: ['Supervised learning uses labeled examples.', 'Unsupervised learning finds structure without labels.', 'Unseen test data checks whether the model generalizes.'],
+        example: 'A subscription company can predict which customers may cancel and send a retention offer.',
+        limitation: 'Biased, incomplete, or outdated data can produce unreliable predictions.'
+      },
+      {
+        matches: ['marketing', 'digital marketing'],
+        title: 'Marketing',
+        definition: 'Marketing is the process of understanding customer needs, creating value, communicating an offer, and building customer relationships.',
+        points: ['Research identifies customer needs.', 'Targeting selects the audience and positioning communicates value.', 'Product, price, place, and promotion must work together.'],
+        example: 'A cafe can target students with an affordable breakfast bundle promoted through campus social media.',
+        limitation: 'Promotion cannot fix a poor product or an unclear customer need.'
+      },
+      {
+        matches: ['swot'],
+        title: 'SWOT Analysis',
+        definition: 'SWOT analyzes Strengths and Weaknesses inside an organization and Opportunities and Threats in its external environment.',
+        points: ['Strengths and weaknesses are internal.', 'Opportunities and threats are external.', 'A strong strategy matches strengths to opportunities and reduces weaknesses exposed to threats.'],
+        example: 'A local cafe can use its loyal customers to launch delivery before a large competitor opens nearby.',
+        limitation: 'A SWOT list is subjective unless each point is supported by evidence.'
+      }
+    ];
+    const topic = topics.find(item => item.matches.some(match => normalized.includes(match)));
+    if (!topic) return null;
+
+    return `**1. Definition**\n${topic.definition}\n\n**2. Three key ideas**\n- ${topic.points[0]}\n- ${topic.points[1]}\n- ${topic.points[2]}\n\n**3. Business example**\n${topic.example}\n\n**4. Practice example**\nDefinition: ${topic.definition}\nThree key points: ${topic.points.join(' ')}\nPractical example: ${topic.example}\nLimitation: ${topic.limitation}`;
   }
 
   // =========================================================================
@@ -373,13 +432,26 @@
           StorageHelper.set(this.storageKey, this.history.slice(-20));
           DashboardModule.logActivity(`Asked AI: "${text.substring(0, 32)}..."`);
         } else {
-          const errMsg = data.error || 'Unable to process that question locally.';
-          this.renderErrorBubble(errMsg, data.isApiKeyMissing);
+          const offlineReply = getOfflineTutorReply(text);
+          if (offlineReply) {
+            this.renderMessage('assistant', `Free Local Study Tutor: ${text}\n\n${offlineReply}`, true);
+            this.history.push({ role: 'assistant', content: offlineReply });
+            StorageHelper.set(this.storageKey, this.history.slice(-20));
+          } else {
+            const errMsg = data.error || 'Unable to process that question locally.';
+            this.renderErrorBubble(errMsg, data.isApiKeyMissing);
+          }
         }
       } catch (err) {
         loadingBubble.remove();
-        const appUrl = 'http://127.0.0.1:5000';
-        this.renderErrorBubble(`Failed to reach the AI server. Run npm.cmd start, then open ${appUrl}.`);
+        const offlineReply = getOfflineTutorReply(text);
+        if (offlineReply) {
+          this.renderMessage('assistant', `Free Local Study Tutor: ${text}\n\n${offlineReply}`, true);
+          this.history.push({ role: 'assistant', content: offlineReply });
+          StorageHelper.set(this.storageKey, this.history.slice(-20));
+        } else {
+          this.renderErrorBubble('AI server is unavailable. Deploy the backend and configure API_BASE_URL for questions outside the offline tutor topics.');
+        }
       }
     },
 
